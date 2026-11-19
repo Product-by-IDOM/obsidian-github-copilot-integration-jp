@@ -1,10 +1,10 @@
 {
-  "id": "github-copilot-integration",
-  "name": "GitHub Copilot Integration",
-  "version": "1.4.0",
-  "minAppVersion": "0.16.3",
+  "id": "github-copilot-integration-jp",
+  "name": "GitHub Copilot Integration jp version",
+  "version": "1.0.0",
+  "minAppVersion": "0.0.1",
   "description": "Integrate GitHub Copilot for AI-powered text generation and assistance.",
-  "author": "go2engle",
-  "authorUrl": "https://github.com/go2engle",
+  "author": "ymsrk",
+  "authorUrl": "https://github.com/ymsrk",
   "isDesktopOnly": true
 }

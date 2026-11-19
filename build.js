@@ -28,9 +28,9 @@ const removeIdentityEnvReads = {
   },
 };
 
-async function build() {
+async function build(watch = false) {
   try {
-    await esbuild.build({
+    const options = {
       entryPoints: ['src/main.ts'],
       bundle: true,
       external: ['obsidian', 'electron', '@codemirror/state', '@codemirror/view'],
@@ -42,13 +42,24 @@ async function build() {
       minify: production,
       plugins: [removeIdentityEnvReads],
       logLevel: 'info',
-    });
+    };
 
-    console.log('✓ Build complete');
+    if (watch) {
+      const context = await esbuild.context(options);
+      await context.watch();
+      console.log('Watching source files...');
+    } else {
+      await esbuild.build(options);
+      console.log('✓ Build complete');
+    }
   } catch (error) {
     console.error('Build failed:', error);
     process.exit(1);
   }
 }
 
-build();
+if (require.main === module) {
+  void build();
+}
+
+module.exports = { build };

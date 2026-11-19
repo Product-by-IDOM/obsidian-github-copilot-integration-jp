@@ -1,9 +1,11 @@
 # GitHub Copilot Integration
 
-![Build](https://github.com/Go2Engle/obsidian-github-copilot-integration/actions/workflows/main.yml/badge.svg)
-![Latest Release](https://img.shields.io/github/v/release/Go2Engle/obsidian-github-copilot-integration)
-![Obsidian Downloads](https://img.shields.io/badge/dynamic/json?logo=obsidian&color=%23483699&label=downloads&query=%24%5B%22github-copilot-integration%22%5D.downloads&url=https%3A%2F%2Fraw.githubusercontent.com%2Fobsidianmd%2Fobsidian-releases%2Fmaster%2Fcommunity-plugin-stats.json)
-![License](https://img.shields.io/github/license/Go2Engle/obsidian-github-copilot-integration)
+English | [日本語](README.ja.md)
+
+![Build](https://github.com/Product-by-IDOM/obsidian-github-copilot-integration-jp/actions/workflows/main.yml/badge.svg)
+![Latest Release](https://img.shields.io/github/v/release/Product-by-IDOM/obsidian-github-copilot-integration-jp)
+![Obsidian Downloads](https://img.shields.io/badge/dynamic/json?logo=obsidian&color=%23483699&label=downloads&query=%24%5B%22github-copilot-integration-jp%22%5D.downloads&url=https%3A%2F%2Fraw.githubusercontent.com%2Fobsidianmd%2Fobsidian-releases%2Fmaster%2Fcommunity-plugin-stats.json)
+![License](https://img.shields.io/github/license/Product-by-IDOM/obsidian-github-copilot-integration-jp)
 
 GitHub Copilot Integration is an Obsidian plugin that integrates GitHub Copilot with Obsidian, allowing you to chat with your documents, generate notes, rewrite text, and more using AI directly from your vault.
 
@@ -36,12 +38,14 @@ GitHub Copilot Integration is an Obsidian plugin that integrates GitHub Copilot 
 ## Requirements
 
 - Obsidian Desktop (v1.0.0+)
-- **Latest version** of GitHub Copilot CLI installed and accessible from your system PATH
+- A **compatible version** of GitHub Copilot CLI, accessible from your system PATH or through a custom CLI path
   - Install: `npm install -g @github/copilot` (npm) or `winget install GitHub.Copilot` (Windows)
-  - Update: `copilot update` or `npm update -g @github/copilot`
+  - Update (check compatibility first): `copilot update` or `npm update -g @github/copilot`
   - Verify: `copilot --version` (should be v0.0.409 or newer)
 - Active GitHub Copilot subscription
 - GitHub Copilot CLI authenticated: `copilot login`
+
+> **CLI compatibility:** The project's `@github/copilot-sdk` 0.3.0 works with the locked CLI 1.0.48, but CLI 1.0.114 uses an unsupported protocol. To prevent the locked CLI from automatically running a newer version, create a launcher that invokes the absolute path to `node_modules/.bin/copilot` (Windows: `node_modules\.bin\copilot.cmd`) with `--no-auto-update`. Enable "Use custom CLI path" in the plugin settings, set "Path to Copilot executable" to the launcher, and click "Apply & reconnect".
 
 
 ## How to Use
@@ -49,7 +53,7 @@ GitHub Copilot Integration is an Obsidian plugin that integrates GitHub Copilot 
 ### Getting Started
 
 1. **Install**: Place the plugin folder in your vault's `.obsidian/plugins` directory, or install from the Community Plugins browser (after approval).
-2. **Enable**: Go to Settings → Community Plugins → Enable GitHub Copilot Integration.
+2. **Enable**: Go to Settings → Community Plugins → Enable GitHub Copilot Integration jp version.
 
 ### Using the Chat Interface
 
@@ -86,7 +90,7 @@ GitHub Copilot Integration is an Obsidian plugin that integrates GitHub Copilot 
 ## Installation (Developers)
 
 1. Clone this repository.
-2. Run `mv copy-to-obsidian.sh.sample copy-to-obsidian.sh` and update the `OBSIDIAN_PLUGIN_DIR=` variable to point to your `github-copilot-integration` directory inside the plugins folder within your Obsidian vault.
+2. Run `cp copy-to-obsidian.sh.sample copy-to-obsidian.sh` and update the `OBSIDIAN_PLUGIN_DIR=` variable to point to your `github-copilot-integration-jp` directory inside the plugins folder within your Obsidian vault.
 3. Run `npm install` to install dependencies.
 4. Run `npm run build` to build the plugin and copy files to your Obsidian plugins folder automatically.
 5. (Optional) Run `npm run dev` to watch for changes and auto-copy files on every modification.

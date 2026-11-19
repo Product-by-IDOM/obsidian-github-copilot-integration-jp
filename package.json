@@ -1,6 +1,6 @@
 {
-  "name": "github-copilot-integration",
-  "version": "1.4.0",
+  "name": "github-copilot-integration-jp",
+  "version": "1.0.0",
   "description": "GitHub Copilot Integration for Obsidian",
   "main": "main.js",
   "scripts": {

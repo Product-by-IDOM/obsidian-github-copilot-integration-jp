@@ -1,12 +1,14 @@
 // Simple file watcher for development: copies plugin files to Obsidian folder on change
 const fs = require('fs');
 const { exec } = require('child_process');
+const { build } = require('./build.js');
 
 const filesToWatch = [
   './dist/main.js',
   './manifest.json',
   './styles.css',
   './README.md',
+  './README.ja.md',
 ];
 
 console.log('Watching for changes to plugin files...');
@@ -22,3 +24,5 @@ filesToWatch.forEach((file) => {
     });
   });
 });
+
+void build(true);
