@@ -6,6 +6,10 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 Obsidian plugin that integrates GitHub Copilot for AI-powered text generation. Desktop-only. Uses the `@github/copilot-sdk` to communicate with a locally-installed Copilot CLI, streaming responses into the editor via CodeMirror 6 decorations.
 
+## Repository Workflow
+
+Develop this repository as an independent project, even though it was forked from `Go2Engle/obsidian-github-copilot-integration`. Create pull requests only within `Product-by-IDOM/obsidian-github-copilot-integration-jp`; do not open pull requests against the fork source.
+
 ## Build Commands
 
 ```bash
