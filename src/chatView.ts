@@ -8,6 +8,7 @@ import {
   CopilotChatSettings,
   DEFAULT_CHAT_SETTINGS,
 } from './chatTypes';
+import { getSubmitShortcutLabel, isSubmitShortcut } from './keyboard';
 
 // ── Copilot Chat View ──────────────────────────────────────────────────────────
 
@@ -134,21 +135,32 @@ export class CopilotChatView extends ItemView {
       }
     });
 
-    // Handle Enter key (send) and Shift+Enter (newline)
-    this.inputElement.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' && !e.shiftKey) {
-        e.preventDefault();
-        void this.handleSendMessage();
-      } else if (e.key === 'Escape') {
-        this.handleAbort();
-      }
-    });
+    const inputWindow = this.inputElement.ownerDocument.defaultView;
+    if (inputWindow) {
+      this.registerDomEvent(inputWindow, 'keydown', (e) => {
+        if (e.target !== this.inputElement) return;
+
+        if (isSubmitShortcut(e)) {
+          e.preventDefault();
+          e.stopPropagation();
+          void this.handleSendMessage();
+        } else if (e.key === 'Escape') {
+          this.handleAbort();
+        }
+      }, true);
+    }
 
     // Send button
+    const shortcutLabel = getSubmitShortcutLabel();
     this.sendButton = inputRow.createEl('button', {
       cls: 'mod-cta copilot-chat-send',
-      text: 'Send',
+      attr: {
+        'aria-label': `Send message (${shortcutLabel})`,
+        title: `Send message (${shortcutLabel})`,
+      },
     });
+    this.sendButton.createSpan({ cls: 'copilot-chat-send-label', text: 'Send' });
+    this.sendButton.createSpan({ cls: 'copilot-submit-shortcut', text: shortcutLabel });
     this.sendButton.addEventListener('click', () => {
       void this.handleSendMessage();
     });

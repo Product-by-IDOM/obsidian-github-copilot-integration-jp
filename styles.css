@@ -252,6 +252,9 @@
   font-size: var(--font-ui-small);
   font-weight: var(--font-semibold);
   transition: background-color var(--anim-duration-fast);
+  display: flex;
+  align-items: center;
+  gap: var(--size-2-2);
 }
 
 .copilot-inline-edit-submit:hover {
@@ -547,6 +550,14 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: var(--size-2-2);
+}
+
+.copilot-submit-shortcut {
+  font-size: var(--font-ui-smaller);
+  font-weight: var(--font-normal);
+  opacity: 0.75;
+  white-space: nowrap;
 }
 
 .copilot-chat-send:hover {
