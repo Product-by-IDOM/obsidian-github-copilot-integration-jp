@@ -39,7 +39,7 @@ SDK communication mode is platform-specific:
 ### Source Files
 
 - **`src/main.ts`** — Plugin entry point. Contains `CopilotPlugin` class (extends Obsidian `Plugin`), settings tab, action modal, and the core `executeAction()` streaming logic. Manages Copilot CLI detection, SDK client lifecycle, session creation, and text insertion. Also registers the inline edit command and right-click "Send to Copilot Chat" context menu.
-- **`src/inlineEditPopup.ts`** — Floating inline edit popup UI. Positioned above the selection using `EditorView.coordsAtPos()`. Contains a text input, submit button, and append/replace mode toggle. Keyboard: Enter submits, Escape dismisses.
+- **`src/inlineEditPopup.ts`** — Floating inline edit popup UI. Positioned above the selection using `EditorView.coordsAtPos()`. Contains a text input, submit button, and append/replace mode toggle. Keyboard: Cmd+Enter (Ctrl+Enter on Windows/Linux) submits, Escape dismisses.
 - **`src/chatView.ts`** — Sidebar chat panel (`ItemView`). Manages chat threads, message rendering (via `MarkdownRenderer`), streaming responses, and selection context chips. `setContextAndFocus()` accepts text from the right-click menu and shows a dismissible context chip above the input.
 - **`src/chatSession.ts`** — Manages `CopilotSession` instances for chat threads. Uses a delegation pattern for `assistant.message_delta` handlers to avoid stacking on reused sessions.
 - **`src/chatTypes.ts`** — Type definitions and constants for the chat system (`ChatMessage`, `ChatThread`, `CopilotChatSettings`).

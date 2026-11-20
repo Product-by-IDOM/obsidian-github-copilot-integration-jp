@@ -58,7 +58,7 @@ GitHub Copilot Integration is an Obsidian plugin that integrates GitHub Copilot 
 ### Using the Chat Interface
 
 1. **Open Chat**: Click the message icon (💬) in the left ribbon, or use the command palette (Cmd+P / Ctrl+P) and search for "Open chat".
-2. **Ask Questions**: Type your question or request in the input field and press Enter (Shift+Enter for newline).
+2. **Ask Questions**: Type your question or request in the input field and press Cmd+Enter (Ctrl+Enter on Windows/Linux) to send. Press Enter for a newline.
 3. **Automatic Context**: The chat automatically includes the content of your active document as context.
 4. **Insert Responses**: Hover over any AI response and click "Insert into document" to add it to your active note.
 5. **New Conversation**: Click the "+" button in the chat toolbar to start a fresh conversation.
@@ -70,7 +70,7 @@ GitHub Copilot Integration is an Obsidian plugin that integrates GitHub Copilot 
 2. **Trigger**: Open the command palette and search for "Inline edit", or bind it to a hotkey for quick access.
 3. **Describe Your Edit**: A floating input box appears above your selection — type what you want (e.g., "convert to bullet list", "add error handling", "translate to Spanish").
 4. **Choose Mode**: Toggle between **Append** (adds content after selection) and **Replace** (replaces selection) using the buttons below the input.
-5. **Submit**: Press Enter or click "Go". The AI response streams directly into your document.
+5. **Submit**: Press Cmd+Enter (Ctrl+Enter on Windows/Linux) or click "Go". The AI response streams directly into your document.
 
 ### Send Selection to Chat
 

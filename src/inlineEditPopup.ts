@@ -1,4 +1,5 @@
 import { EditorView } from '@codemirror/view';
+import { getSubmitShortcutLabel, isSubmitShortcut } from './keyboard';
 
 export type InlineEditMode = 'replace' | 'append';
 
@@ -9,6 +10,7 @@ export class InlineEditPopup {
   private onDismissCallback: () => void;
   private editorView: EditorView;
   private keydownHandler: (e: KeyboardEvent) => void;
+  private listenerWindow: Window;
   private mode: InlineEditMode = 'append';
   private modelSelect: HTMLSelectElement;
 
@@ -37,10 +39,16 @@ export class InlineEditPopup {
     });
     this.input.type = 'text';
 
+    const shortcutLabel = getSubmitShortcutLabel();
     const submitBtn = createEl('button', {
       cls: 'copilot-inline-edit-submit',
-      text: 'Go',
+      attr: {
+        'aria-label': `Submit inline edit (${shortcutLabel})`,
+        title: `Submit inline edit (${shortcutLabel})`,
+      },
     });
+    submitBtn.createSpan({ text: 'Go' });
+    submitBtn.createSpan({ cls: 'copilot-submit-shortcut', text: shortcutLabel });
     submitBtn.addEventListener('click', () => this.handleSubmit());
 
     inputRow.appendChild(this.input);
@@ -93,8 +101,11 @@ export class InlineEditPopup {
     this.container.appendChild(modeRow);
 
     // Keyboard handling
+    this.listenerWindow = this.input.ownerDocument.defaultView!;
     this.keydownHandler = (e: KeyboardEvent) => {
-      if (e.key === 'Enter' && !e.shiftKey) {
+      if (e.target !== this.input) return;
+
+      if (isSubmitShortcut(e)) {
         e.preventDefault();
         e.stopPropagation();
         this.handleSubmit();
@@ -104,7 +115,7 @@ export class InlineEditPopup {
         this.onDismissCallback();
       }
     };
-    this.input.addEventListener('keydown', this.keydownHandler);
+    this.listenerWindow.addEventListener('keydown', this.keydownHandler, true);
 
     // Position above the selection, centered horizontally.
     // Coords from coordsAtPos are viewport-relative, matching position:fixed.
@@ -130,7 +141,7 @@ export class InlineEditPopup {
   }
 
   dismiss(): void {
-    this.input.removeEventListener('keydown', this.keydownHandler);
+    this.listenerWindow.removeEventListener('keydown', this.keydownHandler, true);
     this.container.remove();
   }
 
